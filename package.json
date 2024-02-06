@@ -2,6 +2,11 @@
   "name": "expenses-tracker",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Faijul Azim",
+    "email": "faijul.azim.360@gmail.com",
+    "url": "https://azim-profile.netlify.app/"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
