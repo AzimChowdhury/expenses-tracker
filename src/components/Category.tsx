@@ -1,9 +1,10 @@
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Image from 'next/image';
+import Rightbar from './Rightbar';
 
 const Category = () => {
     return (
-        <div className="bg-white w-full rounded-2xl">
+        <div className="bg-white w-full rounded-2xl relative">
             <div className="w-4/6  py-14 px-20">
                 {/*    Category Heading  */}
                 <div className='flex justify-between items-center'>
@@ -64,6 +65,9 @@ const Category = () => {
                     </div>
                 </div>
             </div>
+
+
+            <Rightbar />
         </div>
     );
 };

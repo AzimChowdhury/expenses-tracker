@@ -18,7 +18,7 @@ const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode; }>)
     return (
         <div className="dashboard   min-w-screen min-h-screen bg-[#32A7E2] p-7 flex">
             <Sidebar handleChange={handleChange} value={value} />
-            {/* {children} */}
+
             {
                 value === 1 && <Category />
             }
