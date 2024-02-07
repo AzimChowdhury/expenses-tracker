@@ -47,21 +47,21 @@ const Category = () => {
                             <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
                             <p className='pl-4 font-[500] text-lg'>Transportation</p>
                         </div>
-                        <p className='text-[#A8A8A8]'>Created at 12/12/2023</p>
+                        <p className=' font-semibold'>- 1,25,500</p>
                     </div>
                     <div className='flex justify-between items-center mt-4'>
                         <div className='flex items-center'>
                             <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
                             <p className='pl-4 font-[500] text-lg'>Transportation</p>
                         </div>
-                        <p className='text-[#A8A8A8]'>Created at 12/12/2023</p>
+                        <p className=' font-semibold'>- 75,800</p>
                     </div>
                     <div className='flex justify-between items-center mt-4'>
                         <div className='flex items-center'>
                             <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
                             <p className='pl-4 font-[500] text-lg'>Transportation</p>
                         </div>
-                        <p className='text-[#A8A8A8]'>Created at 12/12/2023</p>
+                        <p className=' font-semibold'>- 1,31,000</p>
                     </div>
                 </div>
             </div>

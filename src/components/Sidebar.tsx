@@ -20,7 +20,7 @@ const Sidebar: FC<SidebarProps> = ({ handleChange, value }) => {
             <div>
                 <p
                     onClick={() => handleChange(0)}
-                    className={`text-xl font-bold mt-10 mb-2 cursor-pointer 
+                    className={`text-xl font-bold mt-12 mb-4 cursor-pointer 
                     ${value == 0 ? 'underline underline-offset-4' : ''}`}
                 >
                     Expenses
