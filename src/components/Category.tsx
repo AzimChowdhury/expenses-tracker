@@ -1,15 +1,22 @@
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Image from 'next/image';
 import Rightbar from './Rightbar';
+import { useState } from 'react';
+import CategoryDialog from './CategoryDialog';
 
 const Category = () => {
+
+    const [createCategoryModal, setCreateCategoryModal] = useState(false);
+
+
+
     return (
         <div className="bg-white w-full rounded-2xl relative">
-            <div className="w-4/6  py-14 px-20">
+            <div className="w-4/6  py-14 lg:px-20 px-12">
                 {/*    Category Heading  */}
                 <div className='flex justify-between items-center'>
                     <p className="text-4xl font-semibold">Category</p>
-                    <p className='text-lg font-semibold  text-[#32A7E2] cursor-pointer'>Add Category  <AddCircleOutlineIcon /></p>
+                    <p onClick={() => setCreateCategoryModal(!createCategoryModal)} className='text-lg font-semibold  text-[#32A7E2] cursor-pointer'>Add Category  <AddCircleOutlineIcon /></p>
                 </div>
 
                 {/* Your Categories */}
@@ -68,6 +75,11 @@ const Category = () => {
 
 
             <Rightbar />
+
+            <CategoryDialog
+                createCategoryModal={createCategoryModal}
+                setCreateCategoryModal={setCreateCategoryModal}
+            />
         </div>
     );
 };

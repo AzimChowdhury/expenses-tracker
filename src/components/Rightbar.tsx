@@ -15,7 +15,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const Rightbar = () => {
     return (
-        <div className="absolute top-0 right-0 bg-[#F9FAFC] w-2/6 h-full rounded-2xl ">
+        <div id='rightbar' className="absolute top-0 right-0 bg-[#F9FAFC] w-2/6 h-full rounded-2xl ">
             <div className="py-14  pr-8 ps-14">
                 <p className="text-xl font-semibold mb-10">where your money go?</p>
 

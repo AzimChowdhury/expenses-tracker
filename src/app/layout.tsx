@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 const inter = Inter({ subsets: ["latin"] });
+import 'dotenv/config'
+
 
 export const metadata: Metadata = {
   title: "Expenses Tracker",
