@@ -1,6 +1,5 @@
 'use client'
 import Sidebar from "@/components/Sidebar";
-import './dashboardLayout.css'
 import { useState } from "react";
 import Category from "@/components/Category";
 import Expenses from "@/components/Expenses";
@@ -17,7 +16,7 @@ const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode; }>)
 
 
     return (
-        <div className="dashboard w-screen h-screen bg-[#32A7E2] p-7 flex">
+        <div className="dashboard   min-w-screen min-h-screen bg-[#32A7E2] p-7 flex">
             <Sidebar handleChange={handleChange} value={value} />
             {/* {children} */}
             {
