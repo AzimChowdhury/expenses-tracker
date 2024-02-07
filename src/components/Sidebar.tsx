@@ -1,7 +1,14 @@
 import Image from 'next/image';
 import './sidebar.css';
+import { FC } from 'react';
 
-const Sidebar = () => {
+interface SidebarProps {
+    handleChange: (newValue: number) => void;
+    value: number;
+}
+
+
+const Sidebar: FC<SidebarProps> = ({ handleChange, value }) => {
     return (
         <div className="text-white w-60 pl-3 pt-12">
             <div>
@@ -12,8 +19,20 @@ const Sidebar = () => {
 
 
             <div>
-                <p className='text-lg font-bold mt-10 mb-2'>Expenses</p>
-                <p className='text-lg font-bold '>Category</p>
+                <p
+                    onClick={() => handleChange(0)}
+                    className={`text-lg font-bold mt-10 mb-2 cursor-pointer 
+                    ${value == 0 ? 'underline underline-offset-4' : ''}`}
+                >
+                    Expenses
+                </p>
+                <p
+                    onClick={() => handleChange(1)}
+                    className={`text-lg font-bold cursor-pointer 
+                    ${value == 1 ? 'underline underline-offset-4' : ''}`}
+                >
+                    Category
+                </p>
             </div>
         </div>
     )
