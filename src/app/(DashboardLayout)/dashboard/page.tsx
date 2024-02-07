@@ -1,7 +1,7 @@
 const Dashboard = () => {
     return (
-        <div>
-            <p>this is dashboard page</p>
+        <div className="bg-white w-full">
+            <p>this is dashboard content</p>
         </div>
     )
 }
