@@ -3,8 +3,8 @@ import Sidebar from "@/components/Sidebar";
 import { useState } from "react";
 import Category from "@/components/Category";
 import Expenses from "@/components/Expenses";
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import SmSidebar from "@/components/SmSidebar";
 
 
 const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
@@ -19,26 +19,29 @@ const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode; }>)
 
 
     return (
-        <div className=" relative  min-w-screen min-h-screen bg-[#32A7E2] p-7 flex">
+        <div>
 
-            <Sidebar handleChange={handleChange} value={value} />
+            <p id="smSidebar" className='absolute top-5 left-[-5px]  z-10 text-white
+             bg-[#32A7E2] border-white border-2 px-[2px] py-2 rounded'
+                onClick={() => setDrawerState(!drawerState)}>
+                <ArrowForwardIosIcon />
+            </p>
 
-            <Button className="absolute top-0 left-0" onClick={() => setDrawerState(!drawerState)}>{'left'}</Button>
-            {/* small device sidebar */}
-            <Drawer
-                anchor={"left"}
-                open={drawerState}
-            >
-                hello
-                <Button onClick={() => setDrawerState(!drawerState)}>{'left'}</Button>
-            </Drawer>
+            <div className="min-w-screen min-h-screen bg-[#32A7E2] p-7 flex">
 
-            {
-                value === 1 && <Category />
-            }
-            {
-                value === 0 && <Expenses />
-            }
+                <Sidebar handleChange={handleChange} value={value} />
+
+
+                {/* small device sidebar */}
+                <SmSidebar drawerState={drawerState} handleChange={handleChange} setDrawerState={setDrawerState} value={value} />
+
+                {
+                    value === 1 && <Category />
+                }
+                {
+                    value === 0 && <Expenses />
+                }
+            </div>
         </div>
     );
 }

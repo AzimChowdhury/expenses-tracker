@@ -9,7 +9,7 @@ interface SidebarProps {
 
 const Sidebar: FC<SidebarProps> = ({ handleChange, value }) => {
     return (
-        <div className="text-white w-64 pl-4 pt-12">
+        <div id='lgSidebar' className="text-white w-64 pl-4 pt-12">
             <div>
                 <Image className='rounded-lg mb-3' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt={''} width={70} height={70} />
                 <p className='text-2xl font-semibold '>Bruno</p>

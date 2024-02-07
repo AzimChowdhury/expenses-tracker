@@ -6,3 +6,21 @@ body {
     max-width: 1680px !important;
     margin: auto;
 }
+
+#lgSidebar {
+    display: block;
+}
+
+#smSidebar {
+    display: none;
+}
+
+@media screen and (max-width: 1050px) {
+    #lgSidebar {
+        display: none;
+    }
+
+    #smSidebar {
+        display: block;
+    }
+}
