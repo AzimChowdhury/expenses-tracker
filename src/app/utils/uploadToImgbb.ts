@@ -1,25 +1,21 @@
-export const uploadToImgBB = async ({ selectedFile }: any) => {
-  if (selectedFile) {
-    try {
-      console.log(2);
-      const formData = new FormData();
-      formData.append("image", selectedFile);
+export const uploadToImgBB = async (img: string | Blob) => {
+  const form = new FormData();
+  form.append("image", img);
 
-      const response = await fetch(
-        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      console.log("uploading . . . ");
-      if (!response.ok) {
-        throw new Error("Failed to upload image");
-      }
-      const data = await response.json();
-      console.log("Image uploaded successfully:", data.data.url);
-    } catch (error) {
-      console.error("Error uploading image:", error);
-    }
+  const url = `${process.env.NEXT_PUBLIC_IMGBB_API}?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`;
+
+  const config = {
+    method: "POST",
+    body: form,
+  };
+
+  try {
+    const response = await fetch(url, config);
+    const data = await response.json();
+
+    return data;
+  } catch (error: any) {
+    console.error("Error uploading image to ImgBB:", error.message);
+    throw new Error("Failed to upload image to ImgBB");
   }
 };

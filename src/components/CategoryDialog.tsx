@@ -13,52 +13,57 @@ import { getCurrentDate } from '@/app/utils/getCurrentDate';
 
 
 const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) => {
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState("");
-    const [imgBBUrl, setImgBBUrl] = useState('')
-    const [name, setName] = useState('')
     const [error, setError] = useState('')
 
     const handleFileInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
 
         if (file) {
-            setSelectedFile(file);
-
-
             const reader = new FileReader();
             reader.onload = () => {
                 setPreviewUrl(reader.result as string);
             };
             reader.readAsDataURL(file);
-            console.log(1);
-            if (selectedFile) {
-
-                uploadToImgBB(selectedFile)
-            }
 
         }
     };
 
 
-    const handleTextFieldChange = (event: any) => {
-        setName(event.target.value);
-    }
 
-    const handleCreateCategory = () => {
-        setError('')
-        if (name === '') {
+    const handleCreateCategory = async (event: any) => {
+        event.preventDefault();
+        const name = event.target.name.value;
+        const image = event.target.image.files[0];
+        setError('');
+
+        if (!name) {
             setError('Name is required');
+            return;
         }
-        if (imgBBUrl === '') {
-            setError('Image is required');
-        }
-        const date = getCurrentDate()
 
-        const data = {
-            name: name, img: imgBBUrl, date: date
+        if (!image) {
+            setError('Image is required');
+            return;
+        }
+
+        try {
+            const imgBBData = await uploadToImgBB(image);
+            const imgBBUrl = imgBBData.data.url;
+
+            const date = getCurrentDate();
+
+            const data = {
+                name: name, img: imgBBUrl, date: date
+            };
+
+            console.log(data);
+        } catch (error: any) {
+            console.error('Error uploading image to ImgBB:', error.message);
+            setError('Failed to upload image');
         }
     }
+
 
     return (
         <div>
@@ -78,40 +83,30 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
                             onClick={() => setCreateCategoryModal(!createCategoryModal)}
                         ><CloseIcon /></p>
                         <p className='text-3xl font-bold'>Create Category</p>
-                        <div className='pt-5'>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& .MuiTextField-root': { width: '100%' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <TextField
-                                    required
-                                    id="outlined-required"
-                                    label="Category Name"
-                                    onChange={handleTextFieldChange}
-                                />
-                            </Box>
-                        </div>
-                        <p className='pt-5'>
-                            <input type="file" accept="image/jpeg, image/png" onChange={handleFileInputChange} />
-                        </p>
-                        {previewUrl && (
-                            <Image src={previewUrl} alt="Preview" style={{ maxWidth: '200%' }} width={200} height={200} className='mt-3 border-2 border-gray-400 rounded' />
+                        <form onSubmit={handleCreateCategory}>
+                            <div className='pt-5'>
+                                <p className='font-semibold'>Category Name</p>
+                                <input type="text" name='name' required className='w-full border-2 border-gray-400 rounded-lg p-2 mt-2' />
+                            </div>
+                            <div className='pt-3'>
+                                < p className='pb-2 font-semibold'>Category Image</p>
+                                <input name='image' type="file" accept="image/jpeg, image/png" onChange={handleFileInputChange} />
+                            </div>
+                            {previewUrl && (
+                                <Image src={previewUrl} alt="Preview" style={{ maxWidth: '200%' }} width={200} height={200} className='mt-3 border-2 border-gray-400 rounded' />
 
-                        )}
+                            )}
 
-                        {
-                            error && <p className='text-red-600 pt-5'>{error}</p>
-                        }
+                            {
+                                error && <p className='text-red-600 pt-5'>{error}</p>
+                            }
 
-                        <p className='pt-5'>
-                            <Button onClick={handleCreateCategory} fullWidth variant="contained">
-                                Create
-                            </Button>
-                        </p>
+                            <p className='pt-5'>
+                                <Button type='submit' fullWidth variant="contained">
+                                    Create
+                                </Button>
+                            </p>
+                        </form>
                     </div>
                 </DialogContent>
             </Dialog>
