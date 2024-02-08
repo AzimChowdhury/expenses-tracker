@@ -1,13 +1,19 @@
+'use client'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Image from 'next/image';
 import Rightbar from './Rightbar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CategoryDialog from './CategoryDialog';
 
 const Category = () => {
 
     const [createCategoryModal, setCreateCategoryModal] = useState(false);
 
+    useEffect(() => {
+        fetch('http://localhost:3000/api/category')
+            .then(res => res.json())
+            .then(data => console.log('data', data));
+    }, [])
 
 
     return (

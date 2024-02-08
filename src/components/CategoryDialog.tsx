@@ -9,13 +9,14 @@ import Image from 'next/image';
 import Button from '@mui/material/Button';
 import { uploadToImgBB } from '@/app/utils/uploadToImgbb';
 import { getCurrentDate } from '@/app/utils/getCurrentDate';
+import { useSession } from 'next-auth/react';
 
 
 
 const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) => {
     const [previewUrl, setPreviewUrl] = useState("");
     const [error, setError] = useState('')
-
+    const { data: session } = useSession()
     const handleFileInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
 
@@ -37,6 +38,11 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
         const image = event.target.image.files[0];
         setError('');
 
+        if (session?.user) {
+            setError('Please Sign in first')
+            return
+        }
+
         if (!name) {
             setError('Name is required');
             return;
@@ -56,11 +62,18 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
             }
             const date = getCurrentDate();
 
-            const data = {
-                name: name, img: imgBBUrl, date: date
-            };
 
-            console.log(data);
+            if (session?.user?.email) {
+                const data = {
+                    name: name, image: imgBBUrl, date: date, user: session.user.email
+                };
+
+
+
+
+            }
+
+
         } catch (error: any) {
             console.error('Error uploading image to ImgBB:', error.message);
             setError('Failed to upload image');
