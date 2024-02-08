@@ -1,15 +1,12 @@
+'use client'
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 const inter = Inter({ subsets: ["latin"] });
 import 'dotenv/config'
+import { SessionProvider } from "next-auth/react";
 
-
-export const metadata: Metadata = {
-  title: "Expenses Tracker",
-  description: "The best expenses tracker",
-};
 
 export default function RootLayout({
   children,
@@ -19,7 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+        <SessionProvider>
+          <AppRouterCacheProvider>
+            {children}
+          </AppRouterCacheProvider>
+        </SessionProvider>
       </body>
     </html>
   );
