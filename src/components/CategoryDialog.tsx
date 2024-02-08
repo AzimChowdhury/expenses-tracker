@@ -50,7 +50,10 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
         try {
             const imgBBData = await uploadToImgBB(image);
             const imgBBUrl = imgBBData.data.url;
-
+            if (!imgBBUrl) {
+                setError('Failed to upload image');
+                return;
+            }
             const date = getCurrentDate();
 
             const data = {
