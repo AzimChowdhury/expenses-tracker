@@ -10,13 +10,27 @@ import Button from '@mui/material/Button';
 import { uploadToImgBB } from '@/app/utils/uploadToImgbb';
 import { getCurrentDate } from '@/app/utils/getCurrentDate';
 import { useSession } from 'next-auth/react';
-
+import { useRouter } from 'next/navigation';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) => {
     const [previewUrl, setPreviewUrl] = useState("");
     const [error, setError] = useState('')
-    const { data: session } = useSession()
+    const { data: session, status } = useSession()
+    const router = useRouter()
+
+    if (status === "loading") {
+        return <div className="flex justify-center mt-48">
+            <CircularProgress />
+        </div>
+    }
+
+    if (status === "unauthenticated") {
+        router.push('/')
+    }
+
+
     const handleFileInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
 
@@ -37,11 +51,6 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
         const name = event.target.name.value;
         const image = event.target.image.files[0];
         setError('');
-
-        if (session?.user) {
-            setError('Please Sign in first')
-            return
-        }
 
         if (!name) {
             setError('Name is required');
@@ -67,18 +76,18 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
                 const data = {
                     name: name, image: imgBBUrl, date: date, user: session.user.email
                 };
+                console.log(data);
 
-
-                // fetch('http://localhost:3000/api/category', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify(data),
-                // })
-                //     .then(res => res.json())
-                //     .then(data => console.log('data', data))
-                //     .catch(err => console.error(err));
+                fetch('http://localhost:3000/api/category', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(res => res.json())
+                    .then(data => console.log('data', data))
+                    .catch(err => console.error(err));
 
 
             }

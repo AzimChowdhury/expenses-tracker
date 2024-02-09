@@ -10,7 +10,12 @@ const options = {
 const client = new MongoClient(uri, options);
 
 (async function () {
-  await client.connect();
+  try {
+    await client.connect();
+    console.log("database connection successful");
+  } catch (err) {
+    console.log("failed to connect database.");
+  }
 })();
 
 export const categoryCollection = client

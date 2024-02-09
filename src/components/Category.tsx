@@ -10,7 +10,7 @@ const Category = () => {
     const [createCategoryModal, setCreateCategoryModal] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/category')
+        fetch('/api/category')
             .then((res) => res.json())
             .then((data) => console.log('data', data))
             .catch((err) => console.error(err));
