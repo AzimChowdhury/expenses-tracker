@@ -46,10 +46,10 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
 
     const handleCreateCategory = async (event: any) => {
         event.preventDefault();
+        setError('');
         const name = event.target.name.value;
         const image = event.target.image.files[0];
-        setError('');
-
+        setError('Loading . . . Please Wait...');
         if (!name) {
             setError('Name is required');
             return;

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Rightbar from './Rightbar';
 import { useEffect, useState } from 'react';
 import CategoryDialog from './CategoryDialog';
+import { useGetTopExpensiveCategory } from '@/app/utils/useGetTopExpensiveCategory';
 
 type categoryType = {
     _id: string,
@@ -16,6 +17,9 @@ type categoryType = {
 const Category = () => {
     const [categories, setCategories] = useState<categoryType[]>([])
     const [createCategoryModal, setCreateCategoryModal] = useState(false);
+
+    const topCategories = useGetTopExpensiveCategory()
+    // console.log(topCategories);
 
     useEffect(() => {
         fetch('/api/category')

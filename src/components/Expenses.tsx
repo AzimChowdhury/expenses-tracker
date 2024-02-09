@@ -8,11 +8,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import ExpenseDialog from './ExpenseDialog';
 import { useEffect, useState } from 'react';
-import { getCurrentTime } from '@/app/utils/getCurrentTime';
+import { getCurrentDate } from '@/app/utils/getCurrentDate';
+import { useGetTopExpensiveCategory } from '@/app/utils/useGetTopExpensiveCategory';
 
 
 
-type expenseType = {
+export type expenseType = {
     _id: string,
     name: string,
     image: string,
@@ -28,6 +29,7 @@ type expenseType = {
 const Expenses = () => {
     const [expenses, setExpenses] = useState<expenseType[]>([])
     const [createExpenseModal, setCreateExpenseModal] = useState(false);
+    const today = getCurrentDate()
 
     useEffect(() => {
         fetch('/api/expense')
@@ -40,7 +42,7 @@ const Expenses = () => {
 
 
     return (
-        <div className="bg-white w-full rounded-2xl relative">
+        <div className="bg-white w-full rounded-2xl relative ">
             <div className="w-4/6  py-14 px-20">
                 {/*    Expenses Heading  */}
                 <div className='flex justify-between items-center'>
@@ -81,7 +83,7 @@ const Expenses = () => {
                                     <Image className='rounded-full' src={expense?.image} alt='' width={50} height={50} />
                                     <div>
                                         <p className='pl-4 font-[600] text-lg'>{expense?.name}</p>
-                                        <p className=' pl-4 text-[#A8A8A8]'>{expense?.time}   .  <LoyaltyIcon /> {expense?.category}</p>
+                                        <p className=' pl-4 text-[#A8A8A8]'> {expense.date} - {expense?.time}   .   <LoyaltyIcon /> {expense?.category}</p>
                                     </div>
                                 </div>
                                 <p className='font-[600]'>- {expense?.expense}</p>
@@ -95,36 +97,20 @@ const Expenses = () => {
                 {/* top expenses */}
                 <div className='pt-10'>
                     <p className='text-lg font-semibold'>Today's Expenses</p>
-                    <div className='flex justify-between items-center mt-4'>
-                        <div className='flex items-center'>
-                            <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
-                            <div>
-                                <p className='pl-4 font-[600] text-lg'>Paid rent for Feb</p>
-                                <p className=' pl-4 text-[#A8A8A8]'>5:12 pm .  <LoyaltyIcon /> Rent</p>
+                    {
+                        expenses?.filter(expense => expense?.date === today)?.map((expense: expenseType) => (
+                            <div key={expense?._id} className='flex justify-between items-center mt-4'>
+                                <div className='flex items-center'>
+                                    <Image className='rounded-full' src={expense?.image} alt='' width={50} height={50} />
+                                    <div>
+                                        <p className='pl-4 font-[600] text-lg'>{expense?.name}</p>
+                                        <p className=' pl-4 text-[#A8A8A8]'> {expense.date} - {expense?.time}   .   <LoyaltyIcon /> {expense?.category}</p>
+                                    </div>
+                                </div>
+                                <p className='font-[600]'>- {expense?.expense}</p>
                             </div>
-                        </div>
-                        <p className='font-[600]'>- 1,85,750</p>
-                    </div>
-                    <div className='flex justify-between items-center mt-4'>
-                        <div className='flex items-center'>
-                            <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
-                            <div>
-                                <p className='pl-4 font-[600] text-lg'>Paid rent for Feb</p>
-                                <p className=' pl-4 text-[#A8A8A8]'>5:12 pm .  <LoyaltyIcon /> Rent</p>
-                            </div>
-                        </div>
-                        <p className='font-[600]'>- 1,85,750</p>
-                    </div>
-                    <div className='flex justify-between items-center mt-4'>
-                        <div className='flex items-center'>
-                            <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
-                            <div>
-                                <p className='pl-4 font-[600] text-lg'>Paid rent for Feb</p>
-                                <p className=' pl-4 text-[#A8A8A8]'>5:12 pm .  <LoyaltyIcon /> Rent</p>
-                            </div>
-                        </div>
-                        <p className='font-[600]'>- 1,85,750</p>
-                    </div>
+                        ))
+                    }
                 </div>
             </div>
 

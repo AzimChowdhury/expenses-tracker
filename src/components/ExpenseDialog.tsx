@@ -71,12 +71,12 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
 
 
     const handleCreateExpense = async (event: any) => {
+        setError('');
         event.preventDefault();
         const name = event.target.name.value;
         const expense = event.target.expense.value;
         const image = event.target.image.files[0];
-        setError('');
-
+        setError('Loading . . . Please Wait...');
         if (!name) {
             setError('Name is required');
             return;
