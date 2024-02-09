@@ -30,8 +30,8 @@ const Category = () => {
 
 
     return (
-        <div className="bg-white w-full rounded-2xl relative">
-            <div className="w-4/6  py-14 lg:px-20 px-12">
+        <div className="bg-white w-full rounded-2xl flex justify-between">
+            <div className="lg:w-4/6 w-full py-14 lg:px-20 px-12">
                 {/*    Category Heading  */}
                 <div className='flex justify-between items-center'>
                     <p className="text-4xl font-semibold">Category</p>

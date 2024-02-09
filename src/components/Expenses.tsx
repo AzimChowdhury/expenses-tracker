@@ -42,8 +42,8 @@ const Expenses = () => {
 
 
     return (
-        <div className="bg-white w-full rounded-2xl relative ">
-            <div className="w-4/6  py-14 px-20">
+        <div className="bg-white w-full rounded-2xl flex justify-between ">
+            <div className="lg:w-4/6 w-full  py-14 px-20">
                 {/*    Expenses Heading  */}
                 <div className='flex justify-between items-center'>
                     <p className="text-4xl font-semibold">Expenses</p>
