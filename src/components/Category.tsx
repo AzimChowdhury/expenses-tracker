@@ -5,14 +5,23 @@ import Rightbar from './Rightbar';
 import { useEffect, useState } from 'react';
 import CategoryDialog from './CategoryDialog';
 
-const Category = () => {
 
+type categoryType = {
+    _id: string,
+    name: string,
+    image: string,
+    date: string,
+    user: string,
+}
+
+const Category = () => {
+    const [categories, setCategories] = useState<categoryType[]>([])
     const [createCategoryModal, setCreateCategoryModal] = useState(false);
 
     useEffect(() => {
         fetch('/api/category')
             .then((res) => res.json())
-            .then((data) => console.log('data', data))
+            .then((data) => setCategories(data?.data))
             .catch((err) => console.error(err));
     }, []);
 
@@ -31,54 +40,40 @@ const Category = () => {
                 {/* Your Categories */}
                 <div className='pt-10'>
                     <p className='text-lg font-semibold'>Your Categories</p>
-                    <div className='flex justify-between items-center mt-4'>
-                        <div className='flex items-center'>
-                            <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
-                            <p className='pl-4 font-[500] text-lg'>Transportation</p>
-                        </div>
-                        <p className='text-[#A8A8A8]'>Created at 12/12/2023</p>
-                    </div>
-                    <div className='flex justify-between items-center mt-4'>
-                        <div className='flex items-center'>
-                            <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
-                            <p className='pl-4 font-[500] text-lg'>Transportation</p>
-                        </div>
-                        <p className='text-[#A8A8A8]'>Created at 12/12/2023</p>
-                    </div>
-                    <div className='flex justify-between items-center mt-4'>
-                        <div className='flex items-center'>
-                            <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
-                            <p className='pl-4 font-[500] text-lg'>Transportation</p>
-                        </div>
-                        <p className='text-[#A8A8A8]'>Created at 12/12/2023</p>
-                    </div>
+
+                    {
+                        categories && categories?.map((category: categoryType) => (
+                            <div key={category?._id} className='flex justify-between items-center mt-4'>
+                                <div className='flex items-center'>
+                                    <Image className='rounded-full' src={category?.image} alt='' width={50} height={50} />
+                                    <p className='pl-4 font-[500] text-lg'>{category?.name}</p>
+                                </div>
+                                <p className='text-[#A8A8A8]'>Created at {category?.date}</p>
+                            </div>
+                        ))
+
+                    }
+
                 </div>
 
 
                 {/* top expenses */}
                 <div className='pt-10'>
                     <p className='text-lg font-semibold'>Top Expenses By Category</p>
-                    <div className='flex justify-between items-center mt-4'>
-                        <div className='flex items-center'>
-                            <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
-                            <p className='pl-4 font-[500] text-lg'>Transportation</p>
-                        </div>
-                        <p className=' font-semibold'>- 1,25,500</p>
-                    </div>
-                    <div className='flex justify-between items-center mt-4'>
-                        <div className='flex items-center'>
-                            <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
-                            <p className='pl-4 font-[500] text-lg'>Transportation</p>
-                        </div>
-                        <p className=' font-semibold'>- 75,800</p>
-                    </div>
-                    <div className='flex justify-between items-center mt-4'>
-                        <div className='flex items-center'>
-                            <Image className='rounded-full' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt='' width={50} height={50} />
-                            <p className='pl-4 font-[500] text-lg'>Transportation</p>
-                        </div>
-                        <p className=' font-semibold'>- 1,31,000</p>
-                    </div>
+
+                    {
+                        categories && categories?.map((category: categoryType) => (
+                            <div key={category?._id} className='flex justify-between items-center mt-4'>
+                                <div className='flex items-center'>
+                                    <Image className='rounded-full' src={category?.image} alt='' width={50} height={50} />
+                                    <p className='pl-4 font-[500] text-lg'>{category?.name}</p>
+                                </div>
+                                <p className='font-semibold'>Total expenses {category?.date}</p>
+                            </div>
+                        ))
+
+                    }
+
                 </div>
             </div>
 

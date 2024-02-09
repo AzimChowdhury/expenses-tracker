@@ -6,15 +6,47 @@ import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import ExpenseDialog from './ExpenseDialog';
+import { useEffect, useState } from 'react';
+
+type categoryType = {
+    _id: string,
+    name: string,
+    image: string,
+    date: string,
+    user: string,
+}
+
+
 
 const Expenses = () => {
+    const [expenses, setExpenses] = useState([])
+    const [categories, setCategories] = useState<categoryType[]>([])
+    const [createExpenseModal, setCreateExpenseModal] = useState(false);
+
+    useEffect(() => {
+        fetch('/api/expense')
+            .then((res) => res.json())
+            .then((data) => setExpenses(data?.data))
+            .catch((err) => console.error(err));
+    }, []);
+
+    useEffect(() => {
+        fetch('/api/category')
+            .then((res) => res.json())
+            .then((data) => setCategories(data?.data))
+            .catch((err) => console.error(err));
+    }, []);
+
+
+
     return (
         <div className="bg-white w-full rounded-2xl relative">
             <div className="w-4/6  py-14 px-20">
                 {/*    Expenses Heading  */}
                 <div className='flex justify-between items-center'>
                     <p className="text-4xl font-semibold">Expenses</p>
-                    <p className='text-lg font-semibold  text-[#32A7E2] cursor-pointer'>Add Expenses  <AddCircleOutlineIcon /></p>
+                    <p onClick={() => setCreateExpenseModal(!createExpenseModal)} className='text-lg font-semibold  text-[#32A7E2] cursor-pointer'>Add Expenses  <AddCircleOutlineIcon /></p>
                 </div>
 
                 {/* Top Expenses */}
@@ -113,6 +145,10 @@ const Expenses = () => {
 
 
             <Rightbar />
+            <ExpenseDialog
+                createExpenseModal={createExpenseModal}
+                setCreateExpenseModal={setCreateExpenseModal}
+            />
         </div>
     );
 };

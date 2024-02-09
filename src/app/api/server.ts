@@ -2,8 +2,8 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 
 const uri = process.env.NEXT_PUBLIC_DB_URL as string;
 const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 };
 
@@ -21,3 +21,6 @@ const client = new MongoClient(uri, options);
 export const categoryCollection = client
   .db(process.env.NEXT_PUBLIC_MONGODB_DB)
   .collection("categoryCollection");
+export const expenseCollection = client
+  .db(process.env.NEXT_PUBLIC_MONGODB_DB)
+  .collection("expenseCollection");

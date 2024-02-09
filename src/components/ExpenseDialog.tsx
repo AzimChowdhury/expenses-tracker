@@ -1,8 +1,6 @@
 
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -14,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import CircularProgress from '@mui/material/CircularProgress';
 
 
-const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) => {
+const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
     const [previewUrl, setPreviewUrl] = useState("");
     const [error, setError] = useState('')
     const { data: session, status } = useSession()
@@ -46,7 +44,7 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
 
 
 
-    const handleCreateCategory = async (event: any) => {
+    const handleCreateExpense = async (event: any) => {
         event.preventDefault();
         const name = event.target.name.value;
         const image = event.target.image.files[0];
@@ -103,8 +101,8 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
     return (
         <div>
             <Dialog
-                open={createCategoryModal}
-                onClose={() => setCreateCategoryModal(false)}
+                open={createExpenseModal}
+                onClose={() => setCreateExpenseModal(false)}
                 sx={{
                     '& .MuiDialog-paper': {
                         width: '35%',
@@ -115,16 +113,16 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
                     <div className='p-6'>
                         <p
                             className='absolute top-10 right-10 cursor-pointer'
-                            onClick={() => setCreateCategoryModal(!createCategoryModal)}
+                            onClick={() => setCreateExpenseModal(!createExpenseModal)}
                         ><CloseIcon /></p>
-                        <p className='text-3xl font-bold'>Create Category</p>
-                        <form onSubmit={handleCreateCategory}>
+                        <p className='text-3xl font-bold'>Create Expense</p>
+                        <form onSubmit={handleCreateExpense}>
                             <div className='pt-5'>
-                                <p className='font-semibold'>Category Name</p>
+                                <p className='font-semibold'>Expense Name</p>
                                 <input type="text" name='name' required className='w-full border-2 border-gray-400 rounded-lg p-2 mt-2' />
                             </div>
                             <div className='pt-3'>
-                                < p className='pb-2 font-semibold'>Category Image</p>
+                                < p className='pb-2 font-semibold'>Expense Image</p>
                                 <input name='image' type="file" accept="image/jpeg, image/png" onChange={handleFileInputChange} />
                             </div>
                             {previewUrl && (
@@ -149,4 +147,4 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
     );
 };
 
-export default CategoryDialog;
+export default ExpenseDialog;

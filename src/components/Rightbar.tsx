@@ -15,46 +15,48 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 const Rightbar = () => {
     return (
-        <div id='rightbar' className="absolute top-0 right-0 bg-[#F9FAFC] w-2/6 h-full rounded-2xl ">
+        <div id='rightbar' className="absolute top-0 right-0 bg-[#F9FAFC] w-2/6 h-full rounded-2xl overflow-y-hidden ">
             <div className="py-14  pr-8 ps-14">
                 <p className="text-xl font-semibold mb-10">where your money go?</p>
+                <div className=''>
 
-                <div className='pb-8'>
-                    <div className='flex justify-between items-center pb-3 font-[500]'>
-                        <p>Food and Drinks</p>
-                        <p>8,35,500</p>
+                    <div className='pb-8'>
+                        <div className='flex justify-between items-center pb-3 font-[500]'>
+                            <p>Food and Drinks</p>
+                            <p>8,35,500</p>
+                        </div>
+                        <p> <BorderLinearProgress variant="determinate" value={80} /></p>
                     </div>
-                    <p> <BorderLinearProgress variant="determinate" value={80} /></p>
-                </div>
-                <div className='pb-8'>
-                    <div className='flex justify-between items-center pb-3 font-[500]'>
-                        <p>Food and Drinks</p>
-                        <p>15,54,561</p>
+                    <div className='pb-8'>
+                        <div className='flex justify-between items-center pb-3 font-[500]'>
+                            <p>Food and Drinks</p>
+                            <p>15,54,561</p>
+                        </div>
+                        <p> <BorderLinearProgress variant="determinate" value={80} /></p>
                     </div>
-                    <p> <BorderLinearProgress variant="determinate" value={80} /></p>
-                </div>
-                <div className='pb-8'>
-                    <div className='flex justify-between items-center pb-3 font-[500]'>
-                        <p>Food and Drinks</p>
-                        <p>15,54,561</p>
+                    <div className='pb-8'>
+                        <div className='flex justify-between items-center pb-3 font-[500]'>
+                            <p>Food and Drinks</p>
+                            <p>15,54,561</p>
+                        </div>
+                        <p> <BorderLinearProgress variant="determinate" value={80} /></p>
                     </div>
-                    <p> <BorderLinearProgress variant="determinate" value={80} /></p>
-                </div>
-                <div className='pb-8'>
-                    <div className='flex justify-between items-center pb-3 font-[500]'>
-                        <p>Food and Drinks</p>
-                        <p>15,54,561</p>
+                    <div className='pb-8'>
+                        <div className='flex justify-between items-center pb-3 font-[500]'>
+                            <p>Food and Drinks</p>
+                            <p>15,54,561</p>
+                        </div>
+                        <p> <BorderLinearProgress variant="determinate" value={80} /></p>
                     </div>
-                    <p> <BorderLinearProgress variant="determinate" value={80} /></p>
-                </div>
-                <div className='pb-8'>
-                    <div className='flex justify-between items-center pb-3 font-[500]'>
-                        <p>Food and Drinks</p>
-                        <p>15,54,561</p>
+                    <div className='pb-8'>
+                        <div className='flex justify-between items-center pb-3 font-[500]'>
+                            <p>Food and Drinks</p>
+                            <p>15,54,561</p>
+                        </div>
+                        <p> <BorderLinearProgress variant="determinate" value={80} /></p>
                     </div>
-                    <p> <BorderLinearProgress variant="determinate" value={80} /></p>
-                </div>
 
+                </div>
             </div>
         </div>
     );
