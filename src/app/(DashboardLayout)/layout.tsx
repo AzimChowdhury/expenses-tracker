@@ -5,11 +5,26 @@ import Category from "@/components/Category";
 import Expenses from "@/components/Expenses";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import SmSidebar from "@/components/SmSidebar";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
     const [drawerState, setDrawerState] = useState<boolean>(false)
     const [value, setValue] = useState<number>(0);
+    const { data: session, status } = useSession()
+    const router = useRouter()
+
+    if (status === "loading") {
+        return <div className="flex justify-center mt-48">
+            <CircularProgress />
+        </div>
+    }
+
+    if (status === "unauthenticated") {
+        router.push('/')
+    }
 
     const handleChange = (newValue: number) => {
         setValue(newValue);

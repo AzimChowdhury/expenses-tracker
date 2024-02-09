@@ -2,7 +2,7 @@
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Image from 'next/image';
 import Rightbar from './Rightbar';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CategoryDialog from './CategoryDialog';
 
 const Category = () => {
@@ -11,10 +11,12 @@ const Category = () => {
 
     useEffect(() => {
         fetch('http://localhost:3000/api/category')
-            .then(res => res.json())
-            .then(data => console.log('data', data))
-            .catch(err => console.error(err));
-    }, [])
+            .then((res) => res.json())
+            .then((data) => console.log('data', data))
+            .catch((err) => console.error(err));
+    }, []);
+
+
 
 
     return (
