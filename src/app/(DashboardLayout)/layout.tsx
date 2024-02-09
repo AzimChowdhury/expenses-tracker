@@ -8,6 +8,8 @@ import SmSidebar from "@/components/SmSidebar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import CircularProgress from '@mui/material/CircularProgress';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode; }>) => {
@@ -57,6 +59,7 @@ const DashboardLayout = ({ children }: Readonly<{ children: React.ReactNode; }>)
                     value === 0 && <Expenses />
                 }
             </div>
+            <ToastContainer />
         </div>
     );
 }

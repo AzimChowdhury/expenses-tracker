@@ -5,7 +5,6 @@ import Rightbar from './Rightbar';
 import { useEffect, useState } from 'react';
 import CategoryDialog from './CategoryDialog';
 
-
 type categoryType = {
     _id: string,
     name: string,
@@ -23,7 +22,7 @@ const Category = () => {
             .then((res) => res.json())
             .then((data) => setCategories(data?.data))
             .catch((err) => console.error(err));
-    }, []);
+    }, [createCategoryModal, categories]);
 
 
 

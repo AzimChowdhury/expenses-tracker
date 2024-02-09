@@ -16,7 +16,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
 
 export async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { data } = req.body;
+    const data = await new Response(req.body).json();
     const expense = await expenseCollection.insertOne(data);
     return NextResponse.json({ data: expense }, { status: 200 });
   } catch (error) {

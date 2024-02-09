@@ -16,8 +16,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
 
 export async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { data } = req.body;
-    console.log(req.body, "req.body");
+    const data = await new Response(req.body).json();
     const category = await categoryCollection.insertOne(data);
     return NextResponse.json({ data: category }, { status: 200 });
   } catch (error) {

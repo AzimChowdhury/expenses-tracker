@@ -1,8 +1,6 @@
 
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -12,7 +10,7 @@ import { getCurrentDate } from '@/app/utils/getCurrentDate';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import { toast } from 'react-toastify';
 
 const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) => {
     const [previewUrl, setPreviewUrl] = useState("");
@@ -78,7 +76,7 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
                 };
 
 
-                fetch('http://localhost:3000/api/category', {
+                fetch('/api/category', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -86,8 +84,22 @@ const CategoryDialog = ({ createCategoryModal, setCreateCategoryModal }: any) =>
                     body: JSON.stringify(data),
                 })
                     .then(res => res.json())
-                    .then(data => console.log('data', data))
-                    .catch(err => console.error(err));
+                    .then(data => {
+                        if (data) {
+                            toast.success("Category created successfully")
+                            setCreateCategoryModal(!createCategoryModal)
+                            setPreviewUrl('');
+                        } else {
+                            toast.error("Fail to create category")
+                            setCreateCategoryModal(!createCategoryModal)
+                            setPreviewUrl('');
+                        }
+                    })
+                    .catch(err => {
+                        toast.error("Fail to create category")
+                        setCreateCategoryModal(!createCategoryModal)
+                        setPreviewUrl('');
+                    });
 
 
             }

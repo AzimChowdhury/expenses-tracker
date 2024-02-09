@@ -14,6 +14,7 @@ import { getCurrentTime } from '@/app/utils/getCurrentTime';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { toast } from 'react-toastify';
 
 type categoryType = {
     _id: string,
@@ -72,6 +73,7 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
     const handleCreateExpense = async (event: any) => {
         event.preventDefault();
         const name = event.target.name.value;
+        const expense = event.target.expense.value;
         const image = event.target.image.files[0];
         setError('');
 
@@ -82,6 +84,11 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
 
         if (!image) {
             setError('Image is required');
+            return;
+        }
+
+        if (!expense) {
+            setError('Expense must bigger than 0');
             return;
         }
 
@@ -97,11 +104,11 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
 
             if (session?.user?.email) {
                 const data = {
-                    name: name, image: imgBBUrl, date: date, time: time, user: session.user.email, expenses: []
+                    name: name, image: imgBBUrl, date: date, time: time, user: session.user.email, expense: expense, category: category
                 };
 
 
-                fetch('http://localhost:3000/api/category', {
+                fetch('/api/expense', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -109,9 +116,22 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
                     body: JSON.stringify(data),
                 })
                     .then(res => res.json())
-                    .then(data => console.log('data', data))
-                    .catch(err => console.error(err));
-
+                    .then(data => {
+                        if (data) {
+                            toast.success("Expense created successfully")
+                            setCreateExpenseModal(!createExpenseModal)
+                            setPreviewUrl('');
+                        } else {
+                            toast.error("Fail to create expense")
+                            setCreateExpenseModal(!createExpenseModal)
+                            setPreviewUrl('');
+                        }
+                    })
+                    .catch(err => {
+                        toast.error("Fail to create expense")
+                        setCreateExpenseModal(!createExpenseModal)
+                        setPreviewUrl('');
+                    });
 
             }
 
@@ -156,7 +176,7 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
                             )}
                             <div className='pt-5'>
                                 <p className='font-semibold'>Total Expense ($)</p>
-                                <input type="number" name='name' required className='w-full border-2 border-gray-400 rounded-lg p-2 mt-2' />
+                                <input type="number" name='expense' required className='w-full border-2 border-gray-400 rounded-lg p-2 mt-2' />
                             </div>
 
                             <div className='pt-5'>
@@ -171,7 +191,7 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
                                 >
                                     {
                                         categories?.map(category => (
-                                            <MenuItem key={category?._id} value={category?._id}>{category?.name}</MenuItem>
+                                            <MenuItem key={category?._id} value={category?.name}>{category?.name}</MenuItem>
                                         ))
                                     }
 
