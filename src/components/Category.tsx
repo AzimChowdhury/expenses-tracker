@@ -19,7 +19,6 @@ const Category = () => {
     const [createCategoryModal, setCreateCategoryModal] = useState(false);
 
     const topCategories = useGetTopExpensiveCategory()
-    // console.log(topCategories);
 
     useEffect(() => {
         fetch('/api/category')
@@ -27,7 +26,6 @@ const Category = () => {
             .then((data) => setCategories(data?.data))
             .catch((err) => console.error(err));
     }, [createCategoryModal, categories]);
-
 
 
 
@@ -65,13 +63,13 @@ const Category = () => {
                     <p className='text-lg font-semibold'>Top Expenses By Category</p>
 
                     {
-                        categories && categories?.map((category: categoryType) => (
-                            <div key={category?._id} className='flex justify-between items-center mt-4'>
+                        topCategories && topCategories?.map((category, index) => (
+                            <div key={category?.category} className='flex justify-between items-center mt-4'>
                                 <div className='flex items-center'>
-                                    <Image className='rounded-full' src={category?.image} alt='' width={50} height={50} />
-                                    <p className='pl-4 font-[500] text-lg'>{category?.name}</p>
+                                    <p className='text-2xl font-bold rounded-3xl border-2 border-gray-500 py-2 px-4 text-gray-500'>{index + 1}</p>
+                                    <p className='pl-4 font-[600] text-lg'>{category?.category}</p>
                                 </div>
-                                <p className='font-semibold'>Total expenses {category?.date}</p>
+                                <p className='font-semibold'>- {category?.totalExpense}</p>
                             </div>
                         ))
 

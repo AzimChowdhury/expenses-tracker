@@ -26,7 +26,7 @@ export const useGetTopExpensiveCategory = () => {
     const result = separatedExpenses.map((group) => ({
       category: group.category,
       totalExpense: group.expenses.reduce(
-        (sum, expense) => sum + expense.expense,
+        (sum, expense) => sum + Number(expense.expense),
         0
       ),
     }));
