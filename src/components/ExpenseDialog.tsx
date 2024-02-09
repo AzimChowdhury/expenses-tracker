@@ -2,7 +2,7 @@
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Button from '@mui/material/Button';
 import { uploadToImgBB } from '@/app/utils/uploadToImgbb';
@@ -10,13 +10,35 @@ import { getCurrentDate } from '@/app/utils/getCurrentDate';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import CircularProgress from '@mui/material/CircularProgress';
+import { getCurrentTime } from '@/app/utils/getCurrentTime';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+type categoryType = {
+    _id: string,
+    name: string,
+    image: string,
+    date: string,
+    user: string,
+}
 
 
 const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
     const [previewUrl, setPreviewUrl] = useState("");
     const [error, setError] = useState('')
+    const [categories, setCategories] = useState<categoryType[]>([])
+    const [category, setCategory] = useState('')
     const { data: session, status } = useSession()
     const router = useRouter()
+
+    useEffect(() => {
+        fetch('/api/category')
+            .then((res) => res.json())
+            .then((data) => setCategories(data?.data))
+            .catch((err) => console.error(err));
+    }, []);
+
 
     if (status === "loading") {
         return <div className="flex justify-center mt-48">
@@ -42,6 +64,9 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
         }
     };
 
+    const handleChange = (event: SelectChangeEvent) => {
+        setCategory(event.target.value as string);
+    };
 
 
     const handleCreateExpense = async (event: any) => {
@@ -68,11 +93,11 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
                 return;
             }
             const date = getCurrentDate();
-
+            const time = getCurrentTime();
 
             if (session?.user?.email) {
                 const data = {
-                    name: name, image: imgBBUrl, date: date, user: session.user.email, expenses: []
+                    name: name, image: imgBBUrl, date: date, time: time, user: session.user.email, expenses: []
                 };
 
 
@@ -129,6 +154,29 @@ const ExpenseDialog = ({ createExpenseModal, setCreateExpenseModal }: any) => {
                                 <Image src={previewUrl} alt="Preview" style={{ maxWidth: '200%' }} width={200} height={200} className='mt-3 border-2 border-gray-400 rounded' />
 
                             )}
+                            <div className='pt-5'>
+                                <p className='font-semibold'>Total Expense ($)</p>
+                                <input type="number" name='name' required className='w-full border-2 border-gray-400 rounded-lg p-2 mt-2' />
+                            </div>
+
+                            <div className='pt-5'>
+                                <p className='font-semibold'>Select the expense category</p>
+                                <Select
+                                    fullWidth={true}
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={category}
+                                    onChange={handleChange}
+                                    sx={{ marginTop: 1 }}
+                                >
+                                    {
+                                        categories?.map(category => (
+                                            <MenuItem key={category?._id} value={category?._id}>{category?.name}</MenuItem>
+                                        ))
+                                    }
+
+                                </Select>
+                            </div>
 
                             {
                                 error && <p className='text-red-600 pt-5'>{error}</p>

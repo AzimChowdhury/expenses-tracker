@@ -8,20 +8,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import ExpenseDialog from './ExpenseDialog';
 import { useEffect, useState } from 'react';
+import { getCurrentTime } from '@/app/utils/getCurrentTime';
 
-type categoryType = {
-    _id: string,
-    name: string,
-    image: string,
-    date: string,
-    user: string,
-}
 
 
 
 const Expenses = () => {
     const [expenses, setExpenses] = useState([])
-    const [categories, setCategories] = useState<categoryType[]>([])
     const [createExpenseModal, setCreateExpenseModal] = useState(false);
 
     useEffect(() => {
@@ -31,12 +24,6 @@ const Expenses = () => {
             .catch((err) => console.error(err));
     }, []);
 
-    useEffect(() => {
-        fetch('/api/category')
-            .then((res) => res.json())
-            .then((data) => setCategories(data?.data))
-            .catch((err) => console.error(err));
-    }, []);
 
 
 
