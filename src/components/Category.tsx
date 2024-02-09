@@ -69,7 +69,7 @@ const Category = () => {
                                     <p className='text-2xl font-bold rounded-3xl border-2 border-gray-500 py-2 px-4 text-gray-500'>{index + 1}</p>
                                     <p className='pl-4 font-[600] text-lg'>{category?.category}</p>
                                 </div>
-                                <p className='font-semibold'>- {category?.totalExpense}</p>
+                                <p className='font-semibold'>- $ {category?.totalExpense}</p>
                             </div>
                         ))
 

@@ -32,6 +32,18 @@ export const useGetTopExpensiveCategory = () => {
     }));
     result.sort((a, b) => b.totalExpense - a.totalExpense);
 
-    return result;
+    const totalExpense = result.reduce(
+      (sum, category) => sum + category.totalExpense,
+      0
+    );
+
+    // Step 2: Calculate percentage for each category
+    const expensesWithPercentage = result.map((category) => ({
+      category: category.category,
+      totalExpense: category.totalExpense,
+      percentage: (category.totalExpense / totalExpense) * 100,
+    }));
+
+    return expensesWithPercentage;
   }
 };

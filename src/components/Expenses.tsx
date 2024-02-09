@@ -86,7 +86,7 @@ const Expenses = () => {
                                         <p className=' pl-4 text-[#A8A8A8]'> {expense.date} - {expense?.time}   .   <LoyaltyIcon /> {expense?.category}</p>
                                     </div>
                                 </div>
-                                <p className='font-[600]'>- {expense?.expense}</p>
+                                <p className='font-[600]'>- $ {expense?.expense}</p>
                             </div>
                         ))
                     }
@@ -107,7 +107,7 @@ const Expenses = () => {
                                         <p className=' pl-4 text-[#A8A8A8]'> {expense.date} - {expense?.time}   .   <LoyaltyIcon /> {expense?.category}</p>
                                     </div>
                                 </div>
-                                <p className='font-[600]'>- {expense?.expense}</p>
+                                <p className='font-[600]'>- $ {expense?.expense}</p>
                             </div>
                         ))
                     }
