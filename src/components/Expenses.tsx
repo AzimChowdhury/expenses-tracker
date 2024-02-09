@@ -77,7 +77,8 @@ const Expenses = () => {
                     </div>
 
                     {
-                        expenses?.map((expense: expenseType) => (
+
+                        expenses.map((expense: expenseType) => (
                             <div key={expense?._id} className='flex justify-between items-center mt-4'>
                                 <div className='flex items-center'>
                                     <Image className='rounded-full' src={expense?.image} alt='' width={50} height={50} />
@@ -89,6 +90,10 @@ const Expenses = () => {
                                 <p className='font-[600]'>- $ {expense?.expense}</p>
                             </div>
                         ))
+
+                    }
+                    {
+                        expenses.length <= 0 && <p className='mt-10'> No expenses found !  Add new expenses.</p>
                     }
 
                 </div>
@@ -110,6 +115,9 @@ const Expenses = () => {
                                 <p className='font-[600]'>- $ {expense?.expense}</p>
                             </div>
                         ))
+                    }
+                    {
+                        expenses?.filter(expense => expense?.date === today).length <= 0 && <p className='mt-10'> No expenses found Today !  Add new expenses.</p>
                     }
                 </div>
             </div>

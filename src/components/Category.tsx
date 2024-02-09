@@ -20,6 +20,7 @@ const Category = () => {
 
     const topCategories = useGetTopExpensiveCategory()
 
+
     useEffect(() => {
         fetch('/api/category')
             .then((res) => res.json())
@@ -54,6 +55,9 @@ const Category = () => {
                         ))
 
                     }
+                    {
+                        categories.length <= 0 && <p className='mt-10'> No categories found !  Add new category.</p>
+                    }
 
                 </div>
 
@@ -73,6 +77,9 @@ const Category = () => {
                             </div>
                         ))
 
+                    }
+                    {
+                        topCategories === undefined && <p className='mt-10'> No categories found !  Add new category.</p>
                     }
 
                 </div>
