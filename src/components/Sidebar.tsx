@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -6,15 +7,24 @@ interface SidebarProps {
     value: number;
 }
 
+interface User {
+    image: string;
+    name: string;
+    email: string;
+}
 
 const Sidebar: FC<SidebarProps> = ({ handleChange, value }) => {
+    const { data: session } = useSession()
+
     return (
         <div id='lgSidebar' className="text-white w-64 pl-4 pt-12">
-            <div>
-                <Image className='rounded-lg mb-3' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt={''} width={70} height={70} />
-                <p className='text-2xl font-semibold '>Bruno</p>
-                <p className=''>bruno@email.com</p>
-            </div>
+            {
+                session?.user?.image && <div>
+                    <Image className='rounded-lg mb-3' src={session.user.image} alt={''} width={70} height={70} />
+                    <p className='text-2xl font-semibold '>{session?.user?.name}</p>
+                    <p className=''>{session?.user?.email}</p>
+                </div>
+            }
 
 
             <div>

@@ -3,9 +3,13 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
 import { Paper } from '@mui/material';
+import { useSession } from 'next-auth/react';
 
 
 const SmSidebar = ({ drawerState, setDrawerState, handleChange, value }: any) => {
+
+    const { data: session } = useSession()
+
     return (
         <div >
             <Drawer
@@ -18,11 +22,13 @@ const SmSidebar = ({ drawerState, setDrawerState, handleChange, value }: any) =>
 
 
                     <div className="text-white w-64 pl-8 pt-8">
-                        <div>
-                            <Image className='rounded-lg mb-3' src={'https://i.ibb.co/RbGMStw/1694309765616.jpg'} alt={''} width={70} height={70} />
-                            <p className='text-2xl font-semibold '>Bruno</p>
-                            <p className=''>bruno@email.com</p>
-                        </div>
+                        {
+                            session?.user?.image && <div>
+                                <Image className='rounded-lg mb-3' src={session?.user?.image} alt={''} width={70} height={70} />
+                                <p className='text-2xl font-semibold '>{session?.user?.name}</p>
+                                <p className=''>{session?.user?.email}</p>
+                            </div>
+                        }
 
 
                         <div>
