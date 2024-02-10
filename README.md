@@ -20,17 +20,16 @@ Expense Tracker is a Next.js application designed to help users manage their exp
 Follow these steps to run the project on your local machine:
 
 1.  **Clone the Project:**
-
-         Clone this project from GitHub.
+ Clone this project from GitHub.
 
 2.  **Install Dependencies:**
+ Run the following command to install the required packages:
 
-        Run the following command to install the required packages:
                ```
                npm install
                ```
 
-3.  **Create .env File:**
+4.  **Create .env File:**
 
     - Create a `.env` file in the root folder and add the following environment variables:
 
@@ -45,7 +44,7 @@ Follow these steps to run the project on your local machine:
 
       Replace `[username]`, `[password]`, `[github client id]`, `[github client secret]`, and `[imgbb api key]` with your actual credentials.
 
-4.  **Start the Project:**
+5.  **Start the Project:**
 
     - Run the development server with:
 
