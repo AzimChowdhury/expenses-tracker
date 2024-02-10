@@ -25,9 +25,8 @@ Follow these steps to run the project on your local machine:
 2.  **Install Dependencies:**
  Run the following command to install the required packages:
 
-               ```
                npm install
-               ```
+            
 
 4.  **Create .env File:**
 
