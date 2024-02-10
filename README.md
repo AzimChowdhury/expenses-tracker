@@ -54,3 +54,19 @@ Follow these steps to run the project on your local machine:
     - Access the application at `http://localhost:3000` in your web browser.
 
 Enjoy tracking your expenses! 📊💸
+
+
+
+### Contact with me
+
+For any query, feedback, review or suggestion contact with me via
+
+#### Email  
+<pre>
+<code id="code-to-copy">
+faijul.azim.360@gmail.com 
+</code>
+</pre>
+
+#### [WhatsApp](https://api.whatsapp.com/send?phone=8801585449223) 
+#### [LinkedIn](https://www.linkedin.com/in/faijul-azim)
