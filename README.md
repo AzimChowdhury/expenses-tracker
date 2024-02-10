@@ -21,13 +21,12 @@ Follow these steps to run the project on your local machine:
 
 1.  **Clone the Project:**
 
-        - Clone this project from GitHub.
+         Clone this project from GitHub.
 
 2.  **Install Dependencies:**
 
-        - Run the following command to install the required packages:
-
-               ```bash
+        Run the following command to install the required packages:
+               ```
                npm install
                ```
 
