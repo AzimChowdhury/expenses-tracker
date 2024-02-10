@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Expense Tracker
 
-## Getting Started
+Expense Tracker is a Next.js application designed to help users manage their expenses. Users can log in with their GitHub account, create expense categories, and record individual expenses within those categories.
 
-First, run the development server:
+## User Manual
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **GitHub Login:**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   - Users must log in using their GitHub account to access the Expense Tracker application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Category Creation:**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   - After logging in, users can create different categories to organize expenses based on types or purposes.
 
-## Learn More
+3. **Expense Logging:**
+   - Users can add new expenses, associating each with a specific category, providing a detailed record of their spending.
 
-To learn more about Next.js, take a look at the following resources:
+## Run this Project Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Follow these steps to run the project on your local machine:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1.  **Clone the Project:**
 
-## Deploy on Vercel
+        - Clone this project from GitHub.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2.  **Install Dependencies:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+        - Run the following command to install the required packages:
+
+               ```bash
+               npm install
+               ```
+
+3.  **Create .env File:**
+
+    - Create a `.env` file in the root folder and add the following environment variables:
+
+      ```env
+      NEXT_PUBLIC_DB_URL=mongodb+srv://[username]:[password]@cluster0.fc6hnmz.mongodb.net/?retryWrites=true&w=majority
+      NEXT_PUBLIC_MONGODB_DB=expense-tracker
+      NEXT_PUBLIC_GITHUB_CLIENT_ID=[github client id]
+      NEXT_PUBLIC_GITHUB_CLIENT_SECRET=[github client secret]
+      NEXT_PUBLIC_IMGBB_API_KEY=[imgbb api key]
+      NEXT_PUBLIC_IMGBB_API=https://api.imgbb.com/1/upload
+      ```
+
+      Replace `[username]`, `[password]`, `[github client id]`, `[github client secret]`, and `[imgbb api key]` with your actual credentials.
+
+4.  **Start the Project:**
+
+    - Run the development server with:
+
+      ```bash
+      npm run dev
+      ```
+
+    - Access the application at `http://localhost:3000` in your web browser.
+
+Enjoy tracking your expenses! 📊💸
